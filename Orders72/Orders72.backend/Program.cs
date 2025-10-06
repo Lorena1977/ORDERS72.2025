@@ -28,4 +28,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//habilita el consumo desde el Frontend
+app.UseCors(x => x
+    .AllowAnyMethod()//Cualquiera puede consumir esos metodos (post, put, get)
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials());
+
 app.Run();
