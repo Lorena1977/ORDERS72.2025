@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Countries\" />
+    <ProjectReference Include="..\Orders72.Shared\Orders72.Shared.csproj" />
   </ItemGroup>
 
 </Project>
