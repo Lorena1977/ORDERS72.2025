@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Orders72.Frontend.Repositories
 {
-    public class Repository : IRepository //Implementa la interfaz Irepository
+    public class Repository: IRepository //Implementa la interfaz Irepository
     {
         private readonly HttpClient _httpClient;
 

@@ -1,25 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Orders72.backend.Data;
 using Orders72.backend.UnitsOfWork.Interfaces;
 using Orders72.Shared.Entities;
 
 namespace Orders72.backend.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
-    public class CountriesController : GenericController<Country>
+    public class StatesController : GenericController<State>
     {
-        private readonly ICountriesUnitOfWork _countriesUnitOfWork;
-        public CountriesController(IGenericUnitOfWork<Country> unit, ICountriesUnitOfWork countriesUnitOfWork) : base(unit)
+        private readonly IStatesUnitOfWork _statesUnitOfWork;
+
+        public StatesController(IGenericUnitOfWork<State> unitOfWork, IStatesUnitOfWork statesUnitOfWork) : base(unitOfWork)
         {
-            _countriesUnitOfWork = countriesUnitOfWork;
+            _statesUnitOfWork = statesUnitOfWork;
         }
+
         [HttpGet]
         public override async Task<IActionResult> GetAsync()
         {
-            var response = await _countriesUnitOfWork.GetAsync();
+            var response = await _statesUnitOfWork.GetAsync();
             if (response.WasSuccess)
             {
                 return Ok(response.Result);
@@ -30,14 +29,13 @@ namespace Orders72.backend.Controllers
         [HttpGet("{id}")]
         public override async Task<IActionResult> GetAsync(int id)
         {
-            var response = await _countriesUnitOfWork.GetAsync(id);
+            var response = await _statesUnitOfWork.GetAsync(id);
             if (response.WasSuccess)
             {
                 return Ok(response.Result);
             }
             return NotFound(response.Message);
         }
-
     }
-}
 
+}
