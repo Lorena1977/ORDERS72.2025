@@ -11,6 +11,7 @@ namespace Orders72.backend.Repositories.Interfaces
         Task<ActionResponse<IEnumerable<Country>>> GetAsync(); //Sobreescribimos el getAsync que me devuelve la lista de paises (para 
         //que me traiga los paises y los estados)
         Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination);
+        Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination);
     }
 
 }
