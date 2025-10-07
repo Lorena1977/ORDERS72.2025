@@ -11,6 +11,7 @@ namespace Orders72.backend.Data
         {
         }
 
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Country> Countries { get; set; }//Propiedad que maneja mi entidad Country que va a crear una tabla Countries
         //Basada en el modelo country.
 
@@ -18,6 +19,7 @@ namespace Orders72.backend.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Country>().HasIndex(c => c.Name).IsUnique(); //Valida que los registros sean únicos por nombre
         }
     }

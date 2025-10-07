@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Orders72.backend.Data;
+using Orders72.backend.Repositories.Implementations;
+using Orders72.backend.Repositories.Interfaces;
+using Orders72.backend.UnitsOfWork.Implementations;
+using Orders72.backend.UnitsOfWork.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,10 @@ builder.Services.AddSwaggerGen();
 
 //Configurar la inyección del DataContext en el Program
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer("name=DockerConnection"));
+builder.Services.AddScoped(typeof(IGenericUnitOfWork<>), typeof(GenericUnitOfWork<>));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
 
 var app = builder.Build();
 

@@ -1,0 +1,15 @@
+﻿@page "/categories/edit/{Id:int}"
+@using Orders72.Shared.Entities
+<h3>Editar Categoría</h3>
+
+@if (category is null)
+{
+    <Loading/>
+}
+else
+{
+    <CategoryForm @ref="categoryForm" Category="category" OnValidSubmit="EditAsync" ReturnAction="Return" />
+}
+
+
+

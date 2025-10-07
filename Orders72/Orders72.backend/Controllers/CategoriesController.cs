@@ -1,19 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Orders72.backend.Data;
 using Orders72.backend.UnitsOfWork.Interfaces;
 using Orders72.Shared.Entities;
 
 namespace Orders72.backend.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
-    public class CountriesController : GenericController<Country>
+    public class CategoriesController : GenericController<Category>
     {
-        public CountriesController(IGenericUnitOfWork<Country> unit) : base(unit)
+        public CategoriesController(IGenericUnitOfWork<Category> unit) : base(unit)
         {
         }
     }
-}
 
+}
