@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Orders72.backend.Data;
 using Orders72.backend.UnitsOfWork.Interfaces;
+using Orders72.Shared.DTOs;
 using Orders72.Shared.Entities;
 
 namespace Orders72.backend.Controllers
@@ -16,10 +17,21 @@ namespace Orders72.backend.Controllers
         {
             _countriesUnitOfWork = countriesUnitOfWork;
         }
-        [HttpGet]
+        [HttpGet("full")]
         public override async Task<IActionResult> GetAsync()
         {
             var response = await _countriesUnitOfWork.GetAsync();
+            if (response.WasSuccess)
+            {
+                return Ok(response.Result);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet]
+        public override async Task<IActionResult> GetAsync(PaginationDTO pagination)
+        {
+            var response = await _countriesUnitOfWork.GetAsync(pagination);
             if (response.WasSuccess)
             {
                 return Ok(response.Result);

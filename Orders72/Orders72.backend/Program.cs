@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Orders72.backend.Data;
 using Orders72.backend.Repositories.Implementations;
 using Orders72.backend.Repositories.Interfaces;
+using Orders72.backend.Services;
 using Orders72.backend.UnitsOfWork.Implementations;
 using Orders72.backend.UnitsOfWork.Interfaces;
 using System.Text.Json.Serialization;
@@ -17,6 +18,7 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<SeedDb>();
+builder.Services.AddScoped<IApiService, ApiService>();
 
 //Configurar la inyección del DataContext en el Program
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer("name=DockerConnection"));
@@ -26,6 +28,8 @@ builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
 builder.Services.AddScoped<IStatesRepository, StatesRepository>();
 builder.Services.AddScoped<ICountriesUnitOfWork, CountriesUnitOfWork>();
 builder.Services.AddScoped<IStatesUnitOfWork, StatesUnitOfWork>();
+builder.Services.AddScoped<ICitiesRepository, CitiesRepository>();
+builder.Services.AddScoped<ICitiesUnitOfWork, CitiesUnitOfWork>();
 
 
 

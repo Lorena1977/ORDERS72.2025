@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Orders72.backend.Data;
+using Orders72.backend.Helpers;
 using Orders72.backend.Repositories.Interfaces;
+using Orders72.Shared.DTOs;
 using Orders72.Shared.Entities;
 using Orders72.Shared.Responses;
 
@@ -18,6 +20,7 @@ namespace Orders72.backend.Repositories.Implementations
         public override async Task<ActionResponse<IEnumerable<State>>> GetAsync()
         {
             var states = await _context.States
+                .OrderBy(x => x.Name)
                 .Include(s => s.Cities)
                 .ToListAsync();
             return new ActionResponse<IEnumerable<State>>
@@ -48,6 +51,38 @@ namespace Orders72.backend.Repositories.Implementations
                 Result = state
             };
         }
+        public override async Task<ActionResponse<IEnumerable<State>>> GetAsync(PaginationDTO pagination)
+        {
+            var queryable = _context.States
+                .Include(x => x.Cities)
+                .Where(x => x.Country!.Id == pagination.Id)
+                .AsQueryable();
+
+            return new ActionResponse<IEnumerable<State>>
+            {
+                WasSuccess = true,
+                Result = await queryable
+                    .OrderBy(x => x.Name)
+                    .Paginate(pagination)
+                    .ToListAsync()
+            };
+        }
+
+        public async override Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination)
+        {
+            var queryable = _context.States
+                .Where(x => x.Country!.Id == pagination.Id)
+                .AsQueryable();
+
+            double count = await queryable.CountAsync();
+            int totalPages = (int)Math.Ceiling(count / pagination.RecordsNumber);
+            return new ActionResponse<int>
+            {
+                WasSuccess = true,
+                Result = totalPages
+            };
+        }
+
     }
 
 }

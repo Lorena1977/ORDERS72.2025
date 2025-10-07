@@ -1,4 +1,5 @@
-﻿using Orders72.Shared.Entities;
+﻿using Orders72.Shared.DTOs;
+using Orders72.Shared.Entities;
 using Orders72.Shared.Responses;
 
 namespace Orders72.backend.Repositories.Interfaces
@@ -9,6 +10,7 @@ namespace Orders72.backend.Repositories.Interfaces
 
         Task<ActionResponse<IEnumerable<Country>>> GetAsync(); //Sobreescribimos el getAsync que me devuelve la lista de paises (para 
         //que me traiga los paises y los estados)
+        Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination);
     }
 
 }

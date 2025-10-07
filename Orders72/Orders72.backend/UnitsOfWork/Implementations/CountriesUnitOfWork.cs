@@ -1,5 +1,6 @@
 ﻿using Orders72.backend.Repositories.Interfaces;
 using Orders72.backend.UnitsOfWork.Interfaces;
+using Orders72.Shared.DTOs;
 using Orders72.Shared.Entities;
 using Orders72.Shared.Responses;
 
@@ -17,6 +18,8 @@ namespace Orders72.backend.UnitsOfWork.Implementations
         public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync() => await _countriesRepository.GetAsync();
 
         public override async Task<ActionResponse<Country>> GetAsync(int id) => await _countriesRepository.GetAsync(id);
+
+        public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination) => await _countriesRepository.GetAsync(pagination);
     }
 
 }
