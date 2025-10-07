@@ -9,7 +9,6 @@ namespace Orders72.Frontend.Pages.Categories
     {
         [Inject] private NavigationManager NavigationManager { get; set; } = null!;
         [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
-
         [Inject] private IRepository Repository { get; set; } = null!;
 
         public List<Category>? Categories { get; set; }

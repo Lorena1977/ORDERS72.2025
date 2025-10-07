@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Orders72.Shared.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Orders72.Shared.Entities
 {
-    public class Country
+    public class Country : IEntityWithName
     {
         //Definimos las propiedades del Pais (código y nombre)
         public int Id { get; set; } //Clave primaria de la entidad País
