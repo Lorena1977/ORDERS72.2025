@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Orders72.backend.Data;
 using Orders72.backend.UnitsOfWork.Interfaces;
@@ -7,7 +9,7 @@ using Orders72.Shared.Entities;
 
 namespace Orders72.backend.Controllers
 {
-
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
     public class CountriesController : GenericController<Country>

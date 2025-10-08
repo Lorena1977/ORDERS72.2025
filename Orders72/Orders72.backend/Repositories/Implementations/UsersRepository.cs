@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Orders72.backend.Data;
 using Orders72.backend.Repositories.Interfaces;
+using Orders72.Shared.DTOs;
 using Orders72.Shared.Entities;
 
 namespace Orders72.backend.Repositories.Implementations
@@ -11,12 +12,22 @@ namespace Orders72.backend.Repositories.Implementations
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
-        public UsersRepository(DataContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly SignInManager<User> _signInManager;
+        public UsersRepository(DataContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
+        }
+        public async Task<SignInResult> LoginAsync(LoginDTO model)
+        {
+            return await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
         }
 
         public async Task<IdentityResult> AddUserAsync(User user, string password)
