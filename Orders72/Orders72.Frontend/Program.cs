@@ -1,17 +1,24 @@
 using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Orders72.Frontend;
+using Orders72.Frontend.AuthenticationProviders;
 using Orders72.Frontend.Repositories;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/")});
+builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/") });
+
+//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/")});
 //configuramos la inyección del Repository
 builder.Services.AddScoped<IRepository, Repository>();
 // configuramos la inyección del SweetAlert
 builder.Services.AddSweetAlert2();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationProviderTest>();
+
 
 await builder.Build().RunAsync();

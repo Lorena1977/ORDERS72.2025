@@ -1,4 +1,5 @@
 using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders72.Frontend.Pages.Countries;
 using Orders72.Frontend.Repositories;
@@ -7,6 +8,7 @@ using Orders72.Shared.Entities;
 
 namespace Orders72.Frontend.Pages.Categories
 {
+    [Authorize(Roles = "Admin")]
     public partial class CategoryCreate
     {
         private FormWithName<Category>? categoryForm;

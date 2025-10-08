@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Orders72.Shared.Entities;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
 namespace Orders72.backend.Data
 {
-    public class DataContext : DbContext //Herada del DbContext.
+    public class DataContext : IdentityDbContext<User> //Herada del IdentiTyDbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

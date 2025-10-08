@@ -1,4 +1,5 @@
 using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Orders72.Frontend.Repositories;
 using Orders72.Frontend.Shared;
@@ -7,6 +8,7 @@ using System.Net;
 
 namespace Orders72.Frontend.Pages.States
 {
+    [Authorize(Roles = "Admin")]
     public partial class StateEdit
     {
         private State? state;
