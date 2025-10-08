@@ -9,6 +9,7 @@ using Orders72.Shared.Entities;
 
 namespace Orders72.backend.Controllers
 {
+
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/[controller]")]
@@ -61,6 +62,13 @@ namespace Orders72.backend.Controllers
                 return Ok(action.Result);
             }
             return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("combo")]
+        public async Task<IActionResult> GetComboAsync()
+        {
+            return Ok(await _countriesUnitOfWork.GetComboAsync());
         }
 
 

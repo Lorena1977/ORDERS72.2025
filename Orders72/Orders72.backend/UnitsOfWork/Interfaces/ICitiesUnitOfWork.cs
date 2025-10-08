@@ -9,6 +9,7 @@ namespace Orders72.backend.UnitsOfWork.Interfaces
         Task<ActionResponse<IEnumerable<City>>> GetAsync(PaginationDTO pagination);
 
         Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination);
+        Task<IEnumerable<City>> GetComboAsync(int stateId);
     }
 
 }

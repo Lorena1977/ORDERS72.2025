@@ -90,6 +90,12 @@ namespace Orders72.backend.Repositories.Implementations
                 Result = totalPages
             };
         }
+        public async Task<IEnumerable<Country>> GetComboAsync()
+        {
+            return await _context.Countries
+                .OrderBy(c => c.Name)
+                .ToListAsync();
+        }
 
     }
 

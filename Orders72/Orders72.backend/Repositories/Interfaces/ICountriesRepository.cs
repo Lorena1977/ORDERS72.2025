@@ -12,6 +12,7 @@ namespace Orders72.backend.Repositories.Interfaces
         //que me traiga los paises y los estados)
         Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination);
         Task<ActionResponse<int>> GetTotalPagesAsync(PaginationDTO pagination);
+        Task<IEnumerable<Country>> GetComboAsync();
     }
 
 }
